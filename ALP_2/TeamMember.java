@@ -1,14 +1,13 @@
 package ALP_2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TeamMember {
 
     private int memberID, totalPoints;
     private String name, role;
     private List<Project> projects;
-    private List<Badge> badges;
+    private Map<String, Badge> badges;
 
     public TeamMember(int memberID, String name, String role) {
         this.memberID = memberID;
@@ -16,7 +15,7 @@ public class TeamMember {
         this.role = role;
         this.projects = new ArrayList<>();
         this.totalPoints = 0;
-        this.badges = new ArrayList<>();
+        this.badges = new HashMap<>();
     }
 
     public int getMemberID() {
@@ -59,46 +58,30 @@ public class TeamMember {
         this.totalPoints = totalPoints;
     }
 
-    public List<Badge> getBadges() {
+    public Map<String, Badge> getBadges() {
         return badges;
     }
 
-    public void setBadges(List<Badge> badges) {
+    public void setBadges(Map<String, Badge> badges) {
         this.badges = badges;
     }
 
-    // add points to the totalPoints
     public void addPoints(int points) {
         this.totalPoints += points;
         awardBadge();
     }
 
-    public void addBadge(Badge badge) {
-        this.badges.add(badge);
-    }
-
-    // Method to check and award badge based on totalPoints
     private void awardBadge() {
-        if (totalPoints >= 10000 && !hasBadge("Diamond Badge")) {
-            addBadge(new Badge("Diamond Badge", "Awarded for achieving 10000 points", 10000));
-        } else if (totalPoints >= 5000 && !hasBadge("Platinum Badge")) {
-            addBadge(new Badge("Platinum Badge", "Awarded for achieving 5000 points", 5000));
-        } else if (totalPoints >= 1000 && !hasBadge("Gold Badge")) {
-            addBadge(new Badge("Gold Badge", "Awarded for achieving 1000 points", 1000));
-        } else if (totalPoints >= 500 && !hasBadge("Silver Badge")) {
-            addBadge(new Badge("Silver Badge", "Awarded for achieving 500 points", 500));
-        } else if (totalPoints >= 100 && !hasBadge("Bronze Badge")) {
-            addBadge(new Badge("Bronze Badge", "Awarded for achieving 100 points", 100));
+        if (totalPoints >= 10000 && !badges.containsKey("Diamond Badge")) {
+            badges.put("Diamond Badge", new Badge("Diamond Badge", "Awarded for achieving 10000 points", 10000));
+        } else if (totalPoints >= 5000 && !badges.containsKey("Platinum Badge")) {
+            badges.put("Platinum Badge", new Badge("Platinum Badge", "Awarded for achieving 5000 points", 5000));
+        } else if (totalPoints >= 1000 && !badges.containsKey("Gold Badge")) {
+            badges.put("Gold Badge", new Badge("Gold Badge", "Awarded for achieving 1000 points", 1000));
+        } else if (totalPoints >= 500 && !badges.containsKey("Silver Badge")) {
+            badges.put("Silver Badge", new Badge("Silver Badge", "Awarded for achieving 500 points", 500));
+        } else if (totalPoints >= 100 && !badges.containsKey("Bronze Badge")) {
+            badges.put("Bronze Badge", new Badge("Bronze Badge", "Awarded for achieving 100 points", 100));
         }
-    }
-
-    // Method to check if a badge already exists
-    private boolean hasBadge(String badgeName) {
-        for (Badge badge : badges) {
-            if (badge.getName().equals(badgeName)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
