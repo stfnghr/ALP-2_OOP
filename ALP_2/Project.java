@@ -1,26 +1,43 @@
 package ALP_2;
 
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Project {
+
     private int projectID;
     private String name, description, status;
-        // contoh status: "Not Started", "In Progress", "Completed", "Cancelled"
+    // contoh status: "Not Started", "In Progress", "Completed", "Cancelled"
     private Date startDate, endDate;
-    private List<Task> tasks;
+    private Queue<Task> taskQueue;
     private List<TeamMember> teamMembers;
+    private List<ProgressReport> progressReports;
 
-    public Project(int projectID, String name, String description, String status, Date startDate, Date endDate, List<Task> tasks, List<TeamMember> teamMembers) {
+    public Project(int projectID, String name, String description, String status, Date startDate, Date endDate) {
         this.projectID = projectID;
         this.name = name;
         this.description = description;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.tasks = new ArrayList<>();
+        this.taskQueue = new PriorityQueue<>(Comparator.comparing(Task::getDueDate));
         this.teamMembers = new ArrayList<>();
+        this.progressReports = new ArrayList<>();
+    }
+
+    public void addTask(Task task) {
+        this.taskQueue.offer(task);
+    }
+
+    public Task getNextTask() {
+        return this.taskQueue.poll();
+    }
+    
+    public void addProgressReport(ProgressReport report){
+        this.progressReports.add(report);
+    }
+    
+    public List<ProgressReport> getProgressReports(){
+        return progressReports;
     }
 
     public int getProjectID() {
@@ -47,6 +64,14 @@ public class Project {
         this.description = description;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
@@ -63,20 +88,12 @@ public class Project {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
-        return status;
+    public Queue<Task> getTaskQueue() {
+        return taskQueue;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setTaskQueue(Queue<Task> taskQueue) {
+        this.taskQueue = taskQueue;
     }
 
     public List<TeamMember> getTeamMembers() {
@@ -86,5 +103,5 @@ public class Project {
     public void setTeamMembers(List<TeamMember> teamMembers) {
         this.teamMembers = teamMembers;
     }
-    
+
 }
