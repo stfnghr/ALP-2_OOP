@@ -7,13 +7,11 @@ public class UserManager {
     private List<User> users;
     private int nextUserID;
 
-    // Constructor
     public UserManager() {
         this.users = new ArrayList<>();
         this.nextUserID = 1;
     }
 
-    // Method to register a new user
     public boolean signUp(String username, String email, String password) {
         // Check if the username or email already exists
         for (User user : users) {
@@ -38,8 +36,11 @@ public class UserManager {
         }
         return null; // Login failed
     }
-
-    // Method to get all users (for testing purposes)
+    
+    public int getNextUserID(){
+        return nextUserID;
+    }
+    
     public List<User> getAllUsers() {
         return users;
     }
