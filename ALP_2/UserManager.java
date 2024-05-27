@@ -12,16 +12,21 @@ public class UserManager {
         this.nextUserID = 1;
     }
 
-    public boolean signUp(String username, String email, String password) {
+    public boolean signUp(String username, String email, String password, String role) {
         // Check if the username or email already exists
         for (User user : users) {
-            if (user.getUsername().equals(username) || user.getEmail().equals(email)) {
+            if (user.getName().equals(username) || user.getEmail().equals(email)) {
                 return false; // Username or email already taken
             }
         }
 
         // Create a new user and add to the list
-        User newUser = new User(nextUserID++, username, email, password);
+        User newUser;
+        if (role.equalsIgnoreCase("admin")) {
+            newUser = new Admin(nextUserID++, username, email, password);
+        } else {
+            newUser = new Member(nextUserID++, username, email, password);
+        }
         users.add(newUser);
         return true;
     }
@@ -29,7 +34,7 @@ public class UserManager {
     // Method to login a user
     public User login(String usernameOrEmail, String password) {
         for (User user : users) {
-            if ((user.getUsername().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail))
+            if ((user.getName().equals(usernameOrEmail) || user.getEmail().equals(usernameOrEmail))
                     && user.getPassword().equals(password)) {
                 return user; // Login successful
             }
@@ -37,11 +42,18 @@ public class UserManager {
         return null; // Login failed
     }
     
-    public int getNextUserID(){
+    public int getNextUserID() {
         return nextUserID;
     }
     
     public List<User> getAllUsers() {
         return users;
+    }
+    
+    // Method to display all users and their details
+    public void displayAllUsers() {
+        for (User user : users) {
+            user.displayUserDetails();
+        }
     }
 }
