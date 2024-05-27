@@ -2,17 +2,19 @@ package ALP_2;
 
 import java.util.*;
 
+import java.time.LocalDate;
+
 public class Project {
 
     private int projectID;
     private String name, description, status;
     // contoh status: "Not Started", "In Progress", "Completed", "Cancelled"
-    private Date startDate, endDate;
+    private LocalDate startDate, endDate;
     private Queue<Task> taskQueue;
     private List<TeamMember> teamMembers;
     private List<ProgressReport> progressReports;
 
-    public Project(int projectID, String name, String description, String status, Date startDate, Date endDate) {
+    public Project(int projectID, String name, String description, String status, LocalDate startDate, LocalDate endDate) {
         this.projectID = projectID;
         this.name = name;
         this.description = description;
@@ -72,19 +74,19 @@ public class Project {
         this.status = status;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
