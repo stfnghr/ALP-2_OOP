@@ -4,10 +4,10 @@ import java.util.*;
 
 public class TeamMember {
 
-    private int memberID, totalPoints;
-    private String name, role;
-    private List<Project> projects;
-    private Map<String, Badge> badges;
+    protected int memberID, totalPoints;
+    protected String name, role;
+    protected List<Project> projects;
+    protected Map<String, Badge> badges;
 
     public TeamMember(int memberID, String name, String role) {
         this.memberID = memberID;
@@ -82,6 +82,17 @@ public class TeamMember {
             badges.put("Silver Badge", new Badge("Silver Badge", "Awarded for achieving 500 points", 500));
         } else if (totalPoints >= 100 && !badges.containsKey("Bronze Badge")) {
             badges.put("Bronze Badge", new Badge("Bronze Badge", "Awarded for achieving 100 points", 100));
+        }
+    }
+    
+     public void displayBadges() {
+        System.out.println("Badges for " + name + ":");
+        if (badges.isEmpty()) {
+            System.out.println("No badges earned yet.");
+        } else {
+            for (Badge badge : badges.values()) {
+                System.out.println("- " + badge.getName());
+            }
         }
     }
 }
