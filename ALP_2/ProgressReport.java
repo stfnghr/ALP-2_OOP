@@ -1,13 +1,13 @@
 package ALP_2;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ProgressReport {
     private int reportID, projectID;
-    private Date date;
+    private LocalDate date;
     private String summary;
 
-    public ProgressReport(int reportID, int projectID, Date date, String summary) {
+    public ProgressReport(int reportID, int projectID, LocalDate date, String summary) {
         this.reportID = reportID;
         this.projectID = projectID;
         this.date = date;
@@ -30,11 +30,11 @@ public class ProgressReport {
         this.projectID = projectID;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
