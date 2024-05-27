@@ -1,32 +1,13 @@
 package ALP_2;
 
-public class User {
-    private int userID;
-    private String username;
-    private String email;
-    private String password;
+public class User extends TeamMember {
+    protected String email;
+    protected String password;
 
-    public User(int userID, String username, String email, String password) {
-        this.userID = userID;
-        this.username = username;
+    public User(int userID, String name, String email, String password, String role) {
+        super(userID, name, role); // memanggil konstruktor superclass
         this.email = email;
         this.password = password;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -44,8 +25,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public void displayRole() {
-        System.out.println("Role : User");
+
+    public void displayUserDetails() {
+        System.out.println("User ID: " + getMemberID());
+        System.out.println("Name: " + getName());
+        System.out.println("Email: " + email);
+        System.out.println("Role: " + getRole());
+        displayBadges();
     }
 }
