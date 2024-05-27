@@ -1,15 +1,15 @@
 package ALP_2;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Task {
 
     private int taskID, projectID, assignedTo, points;
         // assignedTo : memberID of the assigned team member
     private String name, description, status;
-    private Date dueDate;
+    private LocalDate dueDate;
 
-    public Task(int taskID, int projectID, int assignedTo, int points, String name, String description, String status, Date dueDate) {
+    public Task(int taskID, int projectID, int assignedTo, int points, String name, String description, String status, LocalDate dueDate) {
         this.taskID = taskID;
         this.projectID = projectID;
         this.assignedTo = assignedTo;
@@ -60,11 +60,11 @@ public class Task {
         this.assignedTo = assignedTo;
     }
 
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
